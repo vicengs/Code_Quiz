@@ -115,7 +115,7 @@ var highScore = function(){
         };
       };
       maxScore = nextScore;
-      maxIndex = nextIndex;
+      minIndex = nextIndex;
       scores = scores + "<p>"+ initialsScore[minIndex].initials + " - " + initialsScore[minIndex].score + "</p>";
       // FIN ORDENAR
       //scores = scores + "<p>"+ initialsScore[i].initials + " - " + initialsScore[i].score + "</p>";
@@ -170,12 +170,16 @@ var quizResults = function() {
     });
   }
 };
+// Function to startQuiz
 var startQuiz = function(){
+  // Create countdown element
   var timerEl = document.getElementById('countdown');
+  // Initialize values
   var timeLeft = 75;
   var numQuestion = 0;
-  var load = true;
   score = 0;
+  // Flag to avoid load page just one time each question
+  var load = true;
   viewScores = false;
   var timeInterval = setInterval(function () {
     timerEl.textContent = "Time: " + timeLeft;
@@ -231,10 +235,14 @@ var startQuiz = function(){
     }
   }, 1000);
 };
+// Function to load intro page
 var intro = function(){
+    // Clear container
     mainEl.textContent = "";
     headerEl.textContent = "";
+    // Flag to avoid view scores
     viewScores = true;
+    // Create HTML element to show in screen
     var navEl = document.createElement("div");
     navEl.className = "nav";
     navEl.innerHTML = "<h1 class='scores'><a href='#' onclick='highScore()'>View high scores</a></h1><h1 id='countdown'></h1>"
@@ -243,9 +251,9 @@ var intro = function(){
     introEl.className = "intro";
     introEl.innerHTML = "<h1>Coding Quiz Challenge</h1><p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds.</p><button id='start' class='btn'>Start Quiz</button>";
     mainEl.appendChild(introEl);
+    // Create call startQuiz function on click start button
     var startBtn = document.querySelector("#start");
     startBtn.addEventListener("click",startQuiz);
 };
-//intro();
-highScore();
-//quizResults();
+// Load landing page
+intro();
