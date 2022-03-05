@@ -83,28 +83,56 @@ var loadScore = function(){
 };
 var highScore = function(){
   if(viewScores){
-  mainEl.textContent = "";
-  headerEl.textContent = "";
-  loadScore();
-  var scoreEl = document.createElement("div");
-  var scores="";
-  scoreEl.className = "highScore";
-  for(i=0;i<initialsScore.length;i++){
-    scores = scores + "<p>"+ initialsScore[i].initials + " - " + initialsScore[i].score + "</p>";
-  }
-  scoreEl.innerHTML = "<h1>High Scores</h1>" + scores + "<button id='return' class='btn'>Go Back</button><button id='delete' class='btn'>Clear High Scores</button>";
-  mainEl.appendChild(scoreEl);
-  var returnBtn = document.querySelector("#return");
-  returnBtn.addEventListener("click",function(){
-    intro();
-  });
-  var deleteBtn = document.querySelector("#delete");
-  deleteBtn.addEventListener("click",function(){
-    initialsScore = [];
-    saveScore();
-    highScore();
-  });
-}
+    mainEl.textContent = "";
+    headerEl.textContent = "";
+    loadScore();
+    var scoreEl = document.createElement("div");
+    scoreEl.className = "highScore";
+    var scores="";
+    var maxScore = 0;
+    var nextScore = 0;
+    var minIndex = -1;
+    var nextIndex = -1;
+    for (i=0; i<initialsScore.length; i++){
+      // AQUI PARA ORDENAR
+      //maxScore = initialsScore[i].score
+      nextScore = 0;
+      for (j=initialsScore.length-1; j>=0; j--){
+        if (maxScore === 0){
+          if (initialsScore[j].score > nextScore){
+            nextScore = initialsScore[j].score;
+            nextIndex = j;
+          };
+        }else if (initialsScore[j].score === maxScore){
+          if (j < minIndex){
+            nextScore = initialsScore[j].score
+            nextIndex = j;
+            break;
+          };
+        }else if (initialsScore[j].score < maxScore && initialsScore[j].score > nextScore){
+            nextScore = initialsScore[j].score;
+            nextIndex = j;
+        };
+      };
+      maxScore = nextScore;
+      maxIndex = nextIndex;
+      scores = scores + "<p>"+ initialsScore[minIndex].initials + " - " + initialsScore[minIndex].score + "</p>";
+      // FIN ORDENAR
+      //scores = scores + "<p>"+ initialsScore[i].initials + " - " + initialsScore[i].score + "</p>";
+    };
+    scoreEl.innerHTML = "<h1>High Scores</h1>" + scores + "<button id='return' class='btn'>Go Back</button><button id='delete' class='btn'>Clear High Scores</button>";
+    mainEl.appendChild(scoreEl);
+    var returnBtn = document.querySelector("#return");
+    returnBtn.addEventListener("click",function(){
+      intro();
+    });
+    var deleteBtn = document.querySelector("#delete");
+    deleteBtn.addEventListener("click",function(){
+      initialsScore = [];
+      saveScore();
+      highScore();
+    });
+  };
 };
 var quizResults = function() {
   viewScores = true;
@@ -218,6 +246,6 @@ var intro = function(){
     var startBtn = document.querySelector("#start");
     startBtn.addEventListener("click",startQuiz);
 };
-intro();
-//highScore();
+//intro();
+highScore();
 //quizResults();
