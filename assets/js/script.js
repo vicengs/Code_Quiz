@@ -3,11 +3,11 @@
 /* File     : script.js      */
 /* Author   : Vicente Garcia */
 /* Date     : 03/01/2022     */
-/* Modified : 03/04/2022     */
+/* Modified : 03/05/2022     */
 /* ------------------------- */
+var headerEl = document.getElementById('header');
 var mainEl = document.getElementById('main');
 var subMainEl = document.getElementById('submain');
-var timerEl = document.getElementById('countdown');
 var arrQuiz = [{question: "What is one advantage of Responsive Design for a developer?"
                  ,answer: ["Faster page loading time"
                           ,"Faster development"
@@ -70,10 +70,85 @@ var arrQuiz = [{question: "What is one advantage of Responsive Design for a deve
                 ,correct: 3}
               ];
 var score = 0;
-function startQuiz() {
+var viewScores = true;
+var initialsScore = [];
+var saveScore = function(){
+  localStorage.setItem("scoreQuiz", JSON.stringify(initialsScore));
+}
+var loadScore = function(){
+  initialsScore = JSON.parse(localStorage.getItem('scoreQuiz'));
+  if(!initialsScore){
+    initialsScore = [];
+  };
+};
+var highScore = function(){
+  if(viewScores){
+  mainEl.textContent = "";
+  headerEl.textContent = "";
+  loadScore();
+  var scoreEl = document.createElement("div");
+  var scores="";
+  scoreEl.className = "highScore";
+  for(i=0;i<initialsScore.length;i++){
+    scores = scores + "<p>"+ initialsScore[i].initials + " - " + initialsScore[i].score + "</p>";
+  }
+  scoreEl.innerHTML = "<h1>High Scores</h1>" + scores + "<button id='return' class='btn'>Go Back</button><button id='delete' class='btn'>Clear High Scores</button>";
+  mainEl.appendChild(scoreEl);
+  var returnBtn = document.querySelector("#return");
+  returnBtn.addEventListener("click",function(){
+    intro();
+  });
+  var deleteBtn = document.querySelector("#delete");
+  deleteBtn.addEventListener("click",function(){
+    initialsScore = [];
+    saveScore();
+    highScore();
+  });
+}
+};
+var quizResults = function() {
+  viewScores = true;
+  var resultEl = document.createElement("div");
+  resultEl.className = "score";
+  resultEl.innerHTML = "<h1>All done!</h1><p>Your final score is " + score + "</p>";
+  mainEl.appendChild(resultEl);
+  var saveEl = document.createElement("div");
+  if (score > 0){
+    saveEl.className = "save";
+    saveEl.innerHTML ="<p>Enter your initials: </p><input type='text' name='score' maxlength='5'><button id='submit' class='btn'>Submit</button>";
+    mainEl.appendChild(saveEl);
+    var submitBtn = document.querySelector("#submit");
+    submitBtn.addEventListener("click",function(){
+    var initialsInput = document.querySelector("input[name='score']").value;
+    if (initialsInput){
+      var actualScore = [];
+      actualScore = {
+        initials: initialsInput,
+        score: score
+      };
+      loadScore();
+      initialsScore.push(actualScore);
+      saveScore();
+      highScore();
+    }
+  });
+  }else{
+    saveEl.className = "save";
+    saveEl.innerHTML ="<button id='fail' class='btn'>Go Back</button>";
+    mainEl.appendChild(saveEl);
+    var failBtn = document.querySelector("#fail");
+    failBtn.addEventListener("click",function(){
+      intro();
+    });
+  }
+};
+var startQuiz = function(){
+  var timerEl = document.getElementById('countdown');
   var timeLeft = 75;
   var numQuestion = 0;
   var load = true;
+  score = 0;
+  viewScores = false;
   var timeInterval = setInterval(function () {
     timerEl.textContent = "Time: " + timeLeft;
     timeLeft--;
@@ -118,33 +193,24 @@ function startQuiz() {
       };
     };
     if (timeLeft < 0 || numQuestion === arrQuiz.length){
-        score = score + timeLeft ;
-        clearInterval(timeInterval);
-        timerEl.textContent = "";
-        mainEl.textContent = "Time is Over";
-        //quizResults();
+      timeLeft = Math.max(timeLeft,0);
+      score = score + timeLeft ;
+      clearInterval(timeInterval);
+      timerEl.textContent = "";
+      mainEl.textContent = "";
+      subMainEl.textContent = "";
+      quizResults();
     }
   }, 1000);
 };
-
-// Displays the message one word at a time
-function quizResults() {
-  var wordCount = 0;
-
-  // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var msgInterval = setInterval(function () {
-    // If there are no more words left in the message
-    if (words[wordCount] === undefined) {
-      // Use `clearInterval()` to stop the timer
-      clearInterval(msgInterval);
-    } else {
-      // Display one word of the message
-      mainEl.textContent = words[wordCount];
-      wordCount++;
-    }
-  }, 1000);
-}
 var intro = function(){
+    mainEl.textContent = "";
+    headerEl.textContent = "";
+    viewScores = true;
+    var navEl = document.createElement("div");
+    navEl.className = "nav";
+    navEl.innerHTML = "<h1 class='scores'><a href='#' onclick='highScore()'>View high scores</a></h1><h1 id='countdown'></h1>"
+    headerEl.appendChild(navEl);
     var introEl = document.createElement("div");
     introEl.className = "intro";
     introEl.innerHTML = "<h1>Coding Quiz Challenge</h1><p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds.</p><button id='start' class='btn'>Start Quiz</button>";
@@ -153,3 +219,5 @@ var intro = function(){
     startBtn.addEventListener("click",startQuiz);
 };
 intro();
+//highScore();
+//quizResults();
