@@ -41,9 +41,12 @@ https://vicengs.github.io/Code_Quiz/
 ```
 ## Screenshoots
 
-![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_0.jpg)
-
-
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_1.jpg)
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_2.jpg)
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_3.jpg)
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_4.jpg)
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_5.jpg)
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_6.jpg)
 
 # 04 Web APIs: Code Quiz
 
