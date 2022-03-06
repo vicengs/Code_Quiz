@@ -5,11 +5,20 @@
 /* Date     : 03/01/2022     */
 /* Modified : 03/05/2022     */
 /* ------------------------- */
+/* Style to navbar */
 .nav{
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
 }
+/* Style general containers */
+.container {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+/* Style to intro page */
 .intro{
     padding: 100px;
     font-size: 35px;
@@ -17,6 +26,7 @@
 .intro p{
     font-size: 30px;
 }
+/* Style to all buttons on page */
 .btn {
     border: none;
     background-color: rgb(0, 89, 255);
@@ -32,14 +42,17 @@
     cursor: pointer;
     position: relative;
 }
+/* Style buttons when active */
+.btn:active {
+  box-shadow: 0 0px var(--grey);
+  top: 0;
+}
+/* Style buttons when mouse over */
 .btn:hover {
     box-shadow: 3px 3px 5px black;
     top: -2px;
 }
-.answer{
-  padding: 10px;
-  margin: 10px 0px 10px 0px;
-}
+/* Style questionnaire section */
 .questionnaire{
   display: flex;
   flex-direction: column;
@@ -49,6 +62,15 @@
 .questionnaire h1{
   margin-bottom: 5px;
 }
+.answer{
+  padding: 10px;
+  margin: 10px 0px 10px 0px;
+}
+/* Style line after answers */
+hr{
+  color: black;
+}
+/* Style results section */
 .result{
   padding: 0px;
   margin: 0px;
@@ -57,20 +79,7 @@
 .result p{
   margin-top: 0px;
 }
-hr{
-  color: black;
-}
-
-.btn:active {
-    box-shadow: 0 0px var(--grey);
-    top: 0;
-}
-.container {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-  }
+/* Style finish quiz score */
 .score{
   padding: 10px;
   font-size: 35px;
@@ -82,6 +91,7 @@ hr{
   font-size: 30px;
   
 }
+/* Style save score elements */
 .save{
   display: flex;
   font-size: 30px;
@@ -105,6 +115,7 @@ hr{
   line-height: 5px;
   padding: 13px;
 }
+/* Style highScore section */
 .highScore{
   padding: 10px;
   font-size: 35px;
