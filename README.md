@@ -1,3 +1,50 @@
+# Code Quiz
+
+## Purpose
+An application that shows a timed code quiz that's made up of multiple-choice questions.
+
+## Built with
+* HTML
+* CSS (Advanced)
+* Java Script
+* Web API's (DOM)
+
+## Website
+https://vicengs.github.io/Code_Quiz/
+
+## Contribution
+Made by Vicente Garcia Sepulveda
+
+# Description
+
+Application made from scratch
+
+* Functionality using functions in JavaScript
+* Generate dinamic HTML (DOM)
+* Loops to validate and generate elements
+* Dinamic buttons functions (DOM)
+* Performance using variables and functions
+* Comments of the code
+
+# Instructions (Solved)
+## SSH to clone:
+```
+git@github.com:vicengs/Code_Quiz.git
+```
+## GitHub repository:
+```
+https://github.com/vicengs/Code_Quiz
+```
+## Live URL:
+```
+https://vicengs.github.io/Code_Quiz/
+```
+## Screenshoots
+
+![image text](https://github.com/vicengs/Code_Quiz/blob/main/assets/images/Screenshot_Quiz_0.jpg)
+
+
+
 # 04 Web APIs: Code Quiz
 
 As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. For this challenge, you will build a timed code quiz that's made up of multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
